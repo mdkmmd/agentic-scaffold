@@ -2,6 +2,11 @@
 
 <One or two lines: what this app is, stack, and the solution or entry file.>
 
+## Agent communication
+
+- Communicate with the user in English by default, unless the user explicitly
+  requests another language.
+
 ## Before you touch code
 
 1. Read `docs/guidelines/universal/workflow.md` (how we work).
@@ -30,3 +35,30 @@ Git rules: `docs/guidelines/universal/git.md`.
 <build command>
 <run command>
 ```
+
+## Build output and dependency restore (where applicable*)
+
+These rules apply only when the project uses the corresponding build or package
+tooling; do not create these paths for unrelated stacks.
+
+- Keep custom or isolated build output in the repository-root `TEMP/` directory,
+  outside all project directories. For .NET, for example:
+  `dotnet build <solution> --artifacts-path .\TEMP\codex-build`.
+- Never place custom build output under a project directory. Some build systems
+  can copy it back into their own output and create recursive artifact trees.
+- For NuGet projects, never restore packages into the agent sandbox, `TEMP/`,
+  the repository, or any per-task build folder. Build-output isolation does not
+  apply to package caches.
+- Before restoring NuGet packages, verify `dotnet nuget locals global-packages
+  --list`. The resolved path must be the repository owner's normal user cache,
+  not an agent-owned path such as `CodexSandboxOffline` or another task
+  sandbox.
+- Do not set `NUGET_PACKAGES`, `NUGET_HTTP_CACHE_PATH`, or
+  `NUGET_PLUGINS_CACHE_PATH` to a sandbox, repository, or temporary task path;
+  do not pass `--packages` with such a path.
+- If the normal cache or package network is unavailable, request the required
+  permission or report the blocked restore. Do not create or accept a private
+  sandbox package cache as a workaround.
+
+\* These rules are guidance for applicable tooling; project-specific rules may
+add stricter requirements.
