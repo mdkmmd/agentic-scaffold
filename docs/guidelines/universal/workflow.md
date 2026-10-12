@@ -51,6 +51,23 @@ Changes to approved Goal, Rules, or Touch points require a documented owner-appr
 amendment before affected implementation. Do not silently widen scope. Keep Open
 points for unresolved material questions and Decisions for their resolutions.
 
+## Owner maps
+
+Long spec studies with many steps are hard to follow. Keep a plain-English `map.md`
+beside `spec.md`, and update it after each step. Use
+`docs/specs/NNN-short-name/map.md`, not `context/`.
+Write `map.md` to explain, not to list. Use plain English in complete sentences, and
+give the reason as well as the fact. Explain any technical term the first time you use it.
+Use normal Markdown for structure: numbered `##` headings, real `-` lists (one level
+only), and tables for comparisons and examples. Emoji sit on top of that structure,
+never in place of it: put 🔸 at the start of each `##` heading, and ✅ / ⏳ in the status
+column. Never use emoji as list bullets. Use → only in short examples ("empty cart →
+checkout disabled"), not to chain fragments in place of sentences.
+Include a status board (steps and status), sections from the basics up to the current
+step, dated decisions, and open questions for the owner.
+`spec.md` stays the contract; `map.md` is only a summary and never overrides it.
+Small changes without a numbered spec do not need a map.
+
 ## Status labels
 
 Spec statuses: `draft`, `approved`, `in progress`, `implemented — awaiting verification`, `done`.

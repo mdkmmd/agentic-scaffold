@@ -46,19 +46,27 @@ tooling; do not create these paths for unrelated stacks.
   `dotnet build <solution> --artifacts-path .\TEMP\codex-build`.
 - Never place custom build output under a project directory. Some build systems
   can copy it back into their own output and create recursive artifact trees.
-- For NuGet projects, never restore packages into the agent sandbox, `TEMP/`,
-  the repository, or any per-task build folder. Build-output isolation does not
-  apply to package caches.
-- Before restoring NuGet packages, verify `dotnet nuget locals global-packages
-  --list`. The resolved path must be the repository owner's normal user cache,
-  not an agent-owned path such as `CodexSandboxOffline` or another task
-  sandbox.
-- Do not set `NUGET_PACKAGES`, `NUGET_HTTP_CACHE_PATH`, or
-  `NUGET_PLUGINS_CACHE_PATH` to a sandbox, repository, or temporary task path;
-  do not pass `--packages` with such a path.
-- If the normal cache or package network is unavailable, request the required
-  permission or report the blocked restore. Do not create or accept a private
-  sandbox package cache as a workaround.
+- Reuse the fixed `TEMP/codex-build` path for agent .NET verification; do not
+  create a new output directory for each run.
 
 \* These rules are guidance for applicable tooling; project-specific rules may
 add stricter requirements.
+
+## NuGet restore and package cache
+
+- Use the NuGet cache already configured in the execution environment. Its
+  location or account name (including `CodexSandboxOffline`) alone is not a
+  reason to block a build. Normal restore of the existing dependencies is allowed.
+- Do not remove dependencies, change package versions, edit NuGet configuration,
+  clear or relocate package caches, or overwrite the IDE's normal build/restore
+  metadata as a workaround for verification. Such changes require a separate
+  user request.
+- Do not redirect package caches into `TEMP/`, the repository, or a per-task
+  directory. Build-output isolation applies to compiled and intermediate output,
+  not to downloaded dependencies.
+- Keep agent build and restore intermediate files under the same fixed
+  `TEMP/codex-build` path; do not clean or reuse the IDE's normal `bin/obj`
+  directories for agent verification.
+- Attempt the build within the permitted environment. Report a blocked check
+  only when an actual access, restore, or network failure prevents it; include
+  the concrete error. Do not change security settings or bypass sandbox limits.
