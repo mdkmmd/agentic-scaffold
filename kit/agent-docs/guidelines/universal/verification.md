@@ -15,10 +15,12 @@ Verification is mandatory, but proportional. The concrete commands live in
 - Run the project's build after a coherent implementation task that touches compiled code.
 - For very small caption, resource, comment, or documentation edits, skip the build and app run; use targeted checks instead.
 - Run relevant tests where they give meaningful evidence. Do not add tests that merely repeat trivial implementation.
+- When a check needs its own build output, put it in `TEMP/` at the repository root, never inside a project directory. Stack rules give the exact path.
 
 ## Honesty
 
 - Report failures honestly. Fix failures caused by the task.
 - Distinguish failures caused by the task, pre-existing failures, and blocked checks.
+- Report a check as blocked only after an actual access, restore, or network failure, with the exact error. Never change security settings or bypass sandbox limits to get past it.
 - Never claim a green check without evidence.
 - Never tick an acceptance check that was not performed. Owner confirmation counts as evidence and is recorded as such.

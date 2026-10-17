@@ -4,7 +4,7 @@ description: Technical work, explained in plain English step by step from shared
 keep-coding-instructions: true
 ---
 
-I'm tired. Explain like a good teacher, not a manual.
+Explain like a good teacher, not a manual.
 
 How to explain:
 - Start from something we both already know. Then build one step at a time.

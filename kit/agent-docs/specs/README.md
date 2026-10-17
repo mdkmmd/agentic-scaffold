@@ -3,7 +3,7 @@
 One folder per feature: `NNN-short-name/spec.md`. Numbers are sequential and never reused.
 
 ```
-docs/specs/
+agent-docs/specs/
 ├── _template.md              copy this to start a spec
 ├── 001-short-name/
 │   ├── spec.md               the single source of truth for the feature

@@ -1,25 +1,50 @@
 # Install into a project
 
-1. Copy `docs/` to the project root.
-2. Copy `AGENTS.md` and `CLAUDE.md` to the project root.
-3. Append `.gitignore.snippet` to the project's `.gitignore` (skip if you want docs tracked).
-4. Fill in `AGENTS.md`: project name, one-line description, the `Never` hard limits, the commands.
-5. Fill in `docs/guidelines/project/stack.md` and `project/coding.md`. Leave
-   `project/workflow.md` empty unless the project really deviates.
-6. Delete this file and the scaffold `README.md` from the project copy.
+Written for the agent doing the install. "Scaffold" is this folder; "project" is the
+repo being set up. Stage and commit nothing; report at the end.
 
-One PowerShell copy, from the scaffold folder:
+## 1. Copy
 
-```powershell
-$target = "D:\path\to\your\repo"
-Copy-Item -Recurse docs $target
-Copy-Item AGENTS.md, CLAUDE.md $target
-Get-Content .gitignore.snippet | Add-Content "$target\.gitignore"
-```
+1. Copy everything in `kit/` to the project root: `AGENTS.md`, `CLAUDE.md`, `agent-docs/`.
+   If `AGENTS.md` or `CLAUDE.md` already exists, stop and ask the owner before replacing it.
+2. Append the lines of `gitignore.snippet` that the project `.gitignore` does not already
+   have. Create `.gitignore` if missing.
+3. Copy each matching stack file from `stacks/` to `agent-docs/guidelines/stacks/`:
 
-## Check it worked
+   | Project has | Copy |
+   |---|---|
+   | `*.sln`, `*.slnx`, or `*.csproj` | `dotnet.md` |
 
-- `docs/guidelines/universal/` has 4 files, unedited.
-- `docs/guidelines/project/` has no `<placeholder>` left in `stack.md` and `coding.md`.
-- `AGENTS.md` has no `<PROJECT NAME>` left.
-- `git status` does not list `docs/`, `AGENTS.md`, or `CLAUDE.md` (when gitignored).
+   No match: create no `stacks/` folder.
+
+## 2. Fill in
+
+Inspect the project, then replace the `<placeholders>`:
+
+1. `AGENTS.md`: project name and one-line description.
+2. `agent-docs/guidelines/project/stack.md` and `coding.md`: only facts found in the
+   code, configs, or README. Delete rows and sections that do not apply.
+3. Leave `project/workflow.md` as is.
+
+Never guess hard limits, forbidden zones, environments, or hosts. Leave those
+placeholders in place and list them as questions for the owner.
+
+## 3. Check and report
+
+- `agent-docs/guidelines/universal/` has 4 files, unedited.
+- `git status` does not list `agent-docs/`, `AGENTS.md`, or `CLAUDE.md`.
+- If the scaffold was cloned inside the project, say so and ask before removing it.
+
+Report: what was copied, which stack files, what was filled in, and the open questions.
+
+## Upgrade a project
+
+When the project's `agent-docs/README.md` shows an older scaffold version, replace
+`guidelines/universal/`, `agent-docs/README.md`, and the stack files already in
+`guidelines/stacks/`. Never touch `project/`, `specs/`, `guides/`, or `memos/`.
+
+## Optional: Plain Teacher output style
+
+Copy `extras/output-styles/plain-teacher.md` to `~/.claude/output-styles/`, then pick
+"Plain Teacher" as the output style in Claude Code. It changes only how replies are
+written, not what the agent does.

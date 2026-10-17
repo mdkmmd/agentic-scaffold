@@ -12,7 +12,3 @@
 ## Extra required steps
 
 <e.g. "Run the DB schema snapshot script before any spec touching the listino DB.">
-
-## Docs tracked or local
-
-- `docs/`, `CLAUDE.md`, `AGENTS.md` are: <gitignored (default) / tracked>

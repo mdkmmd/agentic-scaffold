@@ -19,10 +19,9 @@ By default, leave changes unstaged and uncommitted for the owner, then report.
 
 ## Local-only files
 
-`docs/`, `CLAUDE.md`, and `AGENTS.md` are intentionally gitignored in this scaffold's
-default setup, so the agent workspace stays out of the shared history. Ticking a task in
-`spec.md` is a local edit, not something to stage. If a project wants these tracked,
-say so in `../project/workflow.md`.
+`agent-docs/`, `CLAUDE.md`, `AGENTS.md`, and `.claude/` are always gitignored. The agent
+workspace is personal and stays out of the shared history. Ticking a task in `spec.md`
+is a local edit, not something to stage.
 
 ## Handoff message
 

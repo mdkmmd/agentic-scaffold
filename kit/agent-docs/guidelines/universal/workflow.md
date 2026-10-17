@@ -38,11 +38,11 @@ No spec folder, task checklist, or separate approval ceremony is required.
 
 ## Work requiring a spec
 
-Use one folder and one spec per feature: `docs/specs/NNN-short-name/spec.md`.
+Use one folder and one spec per feature: `agent-docs/specs/NNN-short-name/spec.md`.
 Create a `context/` subfolder only when supporting material needs it.
 
 1. **Inspect.** Read relevant code, supplied context, and older specs for the same areas.
-2. **Specify.** Use `docs/specs/_template.md` for a focused spec. Add analysis only when risk warrants it. Write acceptance checks before coding. The owner reviews and approves scope; creating a spec is not approval.
+2. **Specify.** Use `agent-docs/specs/_template.md` for a focused spec. Add analysis only when risk warrants it. Write acceptance checks before coding. The owner reviews and approves scope; creating a spec is not approval.
 3. **Implement.** On authorization, complete the approved scope. Tick tasks only when implemented and their required checks pass. Record material decisions and amendments in the same spec.
 4. **Review and verify.** Review the diff, run applicable checks, and report remaining manual checks. Record owner verification when confirmed; never tick unperformed checks.
 5. **Close.** Mark done only when all tasks and required verification are complete and Outcome is filled. A closed spec is never edited again; subsequent work belongs to a new request or spec.
@@ -55,7 +55,7 @@ points for unresolved material questions and Decisions for their resolutions.
 
 Long spec studies with many steps are hard to follow. Keep a plain-English `map.md`
 beside `spec.md`, and update it after each step. Use
-`docs/specs/NNN-short-name/map.md`, not `context/`.
+`agent-docs/specs/NNN-short-name/map.md`, not `context/`.
 Write `map.md` to explain, not to list. Use plain English in complete sentences, and
 give the reason as well as the fact. Explain any technical term the first time you use it.
 Use normal Markdown for structure: numbered `##` headings, real `-` lists (one level
@@ -79,5 +79,6 @@ verification; verified work need not be committed to close a spec.
 
 ## Sessions and language
 
+Talk to the user in English unless they ask for another language.
 Specs are written in English; context material may use any language.
 Prefer a fresh session per spec or batch, with sufficient recorded context to continue.
